@@ -74,11 +74,14 @@ async def _session(ctx,activity="Chilling"):
     punish_embed.add_field(name="Members:", value=member_field, inline=True)
     punish_embed.add_field(name="Lets chat together",value="[Click here to join](https://discord.gg/mccpGR9YeJ)",inline=False)
 
-    punishment = await info_ch.send(ctx.author.mention+"@here",embed=punish_embed)
+    punishment = await info_ch.send(ctx.author.mention+"@her",embed=punish_embed)
 
     await ctx.send("**Session have been created**\n[Click here to join](https://discord.gg/mccpGR9YeJ)")
 
     while True:
+
+        if not "punishment" in locals():
+            continue
         await asyncio.sleep(10)
         if voice_ch.voice_states.keys():
             new_embed=discord.Embed(
@@ -102,5 +105,6 @@ async def _session(ctx,activity="Chilling"):
         else:
             await punishment.delete()
 
-
+from keep_alive import keep_alive
+keep_alive()
 bot.run(os.getenv("TOKEN"))
